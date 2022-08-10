@@ -1,0 +1,199 @@
+$breakpoints: (
+  mobile: 600px,
+  tablet: 1024px,
+  laptop: 1240px,
+  desktop-lg: 1800px
+);
+
+@mixin breakpoint($breakpoint, $direction) {
+
+  // Get the breakpoint value.
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+  
+  @if $direction == min {
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  }
+} 
+
+//BREAKPOINT
+.header{
+  @include breakpoint(tablet,min ){
+    .hero{
+      display: flex;
+      flex-direction: row-reverse;
+
+
+      &__content{
+        text-align: left;
+        padding-block-start: 10rem;
+      }
+    }
+  
+  }
+}
+
+.main{
+  @include breakpoint(tablet,min ){
+    margin-block-start: 15rem;
+    .different{
+      text-align: left;
+      &:before{
+        width: 20%;
+  
+        top: -30px;
+        left: 0;
+      }
+
+      &__items{
+        margin-block-end: 15rem;
+
+        grid-template-columns: repeat(3,1fr);
+        column-gap: 1.5rem;
+        .item{
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          img{
+            max-width: 25%;
+          }
+        }
+      }
+    }
+
+    .work{
+      width: 85%;
+      margin-block: 15rem;
+      display: flex;
+      align-items: center;
+      justify-content:center;
+      background-image: url('../images/bg-pattern-how-we-work-desktop.svg');
+      .title{
+        text-align: left;
+        max-width: 47rem;
+      }
+      .button{
+        width: 65%;
+        text-align: center;
+        .cta{
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.footer{
+  @include breakpoint(tablet,min ){
+    background-image: url('../images/bg-pattern-footer-desktop.svg');
+    background-repeat: no-repeat;
+    &__nav{
+      grid-template-columns: repeat(4,1fr);
+      width: calc(100% - 15%);
+      margin-inline: auto;
+      
+      .links{
+        align-items: flex-start;
+      
+      }
+    }
+
+    &__social{
+      width: calc(100% - 15%);
+      margin-inline: auto;
+      justify-content: space-between;
+      flex-direction: row;
+      &:before{
+        width:100%;
+      }
+    }
+    &:after{
+      display: none;
+    }
+  }
+}
+
+//LAPTOP
+.header{
+  @include breakpoint(laptop,min ){
+    .nav{
+      width: calc(100% - 24%);
+    }
+    .hero{
+      max-height: 50vh; 
+      position: relative;
+      justify-content: flex-start;
+      &__content{
+        position: relative;
+        align-items: flex-end;
+        width: 100%;
+        padding-block: 15rem;
+
+        background-image:url('../images/bg-pattern-intro-right-desktop.svg');
+        background-position: top right;
+        
+        z-index: 50;
+        .content{
+          max-width:66rem;
+          float: left;
+          padding-left: 12%;
+
+        }
+        &::after{
+          content: '';
+          width: 10%;
+          height: 1px;
+
+
+          position: absolute;
+          top: 20%;
+          left: 12%;
+          background-color: white;
+        }
+        &::before{
+          content: '';
+          position: absolute;
+          top: 350px;
+          left: 0;
+          bottom: -150px;
+          width: 10%;
+          height: 35vh;
+          background-image: url('../images/bg-pattern-intro-left-desktop.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+      }
+
+      &__image{
+        padding-right: 13%;
+
+        position: absolute;
+        top: 50px;
+
+        max-width: 40%;
+        z-index: 100;
+      }
+    }
+
+  }
+}
+.main{
+  @include breakpoint(laptop,min ){
+    margin-block-start: 25rem;
+    .different{
+      &__items{
+        .item{
+          max-width: 38rem;
+        }
+      }
+    }
+  }
+}
+.footer{
+  @include breakpoint(laptop,min ){
+    &::after{
+      background-image: url('../images/bg-pattern-footer-desktop.svg');
+    }
+  }
+}
